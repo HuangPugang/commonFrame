@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt' // 注释处理
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "net.maker.commonframework"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.7
+        sourceCompatibility 1.7
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // 引用外部
+    Map<String, String> libs = rootProject.ext.dependencies
+    // test
+    testCompile 'junit:junit:4.12'
+    // support_v4
+    compile libs.supportv4_23
+    // appcompat_v7
+    compile libs.appcompat_v7
+    // ButterKnife
+    compile libs.butterknife
+    // RxAndroid
+    compile libs.rxandroid
+    // RxJava
+    compile libs.rxjava
+    // RecyclerView
+    compile libs.recyclerview
+    // Retrofit网络处理, beta2自带依赖okhttp2.5
+    compile libs.retrofit2_beta4
+    // Retrofit的rx解析库
+    compile libs.adapter_rxjava_beta4
+    // Retrofit的gson库
+    compile libs.converter_gson_beta4
+    // picasso网络图片加载,优先考虑使用这个
+    compile libs.picasso
+    // dagger
+    compile libs.dagger
+    // dagger
+    apt libs.dagger_compiler
+    // eventBus
+    compile libs.eventBus
+    // log
+    compile libs.Log
+    // andfix
+    compile libs.andfix
+    // sp
+    compile libs.sp
+    // design
+    compile libs.design23
+    // ——————————
+
+    // Java标注
+    provided 'javax.annotation:jsr250-api:1.0'
+}

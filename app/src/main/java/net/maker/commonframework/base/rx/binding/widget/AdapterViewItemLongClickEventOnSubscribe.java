@@ -1,0 +1,48 @@
+package net.maker.commonframework.base.rx.binding.widget;
+
+import android.view.View;
+import android.widget.AdapterView;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.MainThreadSubscription;
+import rx.functions.Func1;
+
+import static net.maker.commonframework.base.rx.binding.internal.Preconditions.checkUiThread;
+
+final class AdapterViewItemLongClickEventOnSubscribe
+    implements Observable.OnSubscribe<AdapterViewItemLongClickEvent> {
+  final AdapterView<?> view;
+  final Func1<? super AdapterViewItemLongClickEvent, Boolean> handled;
+
+  public AdapterViewItemLongClickEventOnSubscribe(AdapterView<?> view,
+      Func1<? super AdapterViewItemLongClickEvent, Boolean> handled) {
+    this.view = view;
+    this.handled = handled;
+  }
+
+  @Override public void call(final Subscriber<? super AdapterViewItemLongClickEvent> subscriber) {
+    checkUiThread();
+
+    AdapterView.OnItemLongClickListener listener = new AdapterView.OnItemLongClickListener() {
+      @Override
+      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        AdapterViewItemLongClickEvent event =
+            AdapterViewItemLongClickEvent.create(parent, view, position, id);
+        if (handled.call(event)) {
+          if (!subscriber.isUnsubscribed()) {
+            subscriber.onNext(event);
+          }
+          return true;
+        }
+        return false;
+      }
+    };
+    view.setOnItemLongClickListener(listener);
+
+    subscriber.add(new MainThreadSubscription() {
+      @Override protected void onUnsubscribe() {
+        view.setOnItemLongClickListener(null);
+      }
+    });
+  }
+}

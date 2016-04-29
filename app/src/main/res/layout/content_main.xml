@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:text="显示信息"
+        android:textColor="@android:color/black"/>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_start_one"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="启动fragment one"/>
+
+        <Button
+            android:id="@+id/btn_start_two"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="启动fragment two"/>
+
+        <Button
+            android:id="@+id/btn_start_three"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="启动fragment three"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom1"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_send_one"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="传数据给fragment one"/>
+
+        <Button
+            android:id="@+id/btn_send_two"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="传数据给fragment two"/>
+
+        <Button
+            android:id="@+id/btn_send_three"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="传数据给fragment three"/>
+
+    </LinearLayout>
+
+</LinearLayout>
